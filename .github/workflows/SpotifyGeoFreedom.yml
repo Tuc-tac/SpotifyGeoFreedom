@@ -1,0 +1,40 @@
+name: Run SpotifyGeoFreedom Script
+
+on:      
+  schedule:
+    - cron: '37 2 * * 1,4'
+    
+  workflow_dispatch:
+      
+jobs:
+  run-powershell:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Get Runner's IP info
+      shell: powershell
+      run: |
+        Invoke-RestMethod -Uri "https://ipinfo.io/json"
+
+    - name: Download and Install Spotify
+      shell: powershell
+      run: |
+        $web_Url = "https://download.scdn.co/SpotifyFullSetup.exe"
+        $local_Url = Join-Path -Path (New-Item -Path (Join-Path -Path $env:TEMP -ChildPath "spot_temp") -ItemType Directory -Force) -ChildPath "SpotifySetup.exe" 
+        curl.exe -q $web_Url -o $local_Url --progress-bar --retry 3 --ssl-no-revoke
+        Start-Sleep -Seconds 1
+
+        Start-Process -FilePath explorer.exe -ArgumentList $local_Url
+        while (-not (get-process | Where-Object { $_.ProcessName -eq "SpotifySetup" })) {}
+        wait-process -name SpotifySetup
+        taskkill /f /im Spotify.exe /t > $null 2>&1
+
+    - name: Launch Spotify
+      shell: powershell
+      run: |
+        $spotifyExe = Join-Path (Join-Path $env:APPDATA "Spotify") "Spotify.exe"
+        Start-Process -FilePath $spotifyExe -ArgumentList "--password=${{ secrets.PASS }}", "--username=${{ secrets.LOGIN }}"
+        Start-Sleep -Seconds 60
