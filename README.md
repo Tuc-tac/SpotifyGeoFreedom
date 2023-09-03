@@ -26,7 +26,7 @@ I have no idea🤣 as long as it's just being tested
 
 Follow these steps to set up and use this method:
 
-1. **Fork this [Repository](https://github.com/amd64fox/SpotifyGeoFreedom)**
+1. **Fork this [Repository](https://github.com/Tuc-tac/SpotifyGeoFreedom)**
 2. **Repository Settings**
    - In your fork's `Settings`
    - navigate to `Secrets and Variables` => `Actions`
