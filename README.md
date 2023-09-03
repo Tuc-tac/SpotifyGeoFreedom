@@ -6,7 +6,7 @@ This solution is designed for users residing in countries where Spotify is not o
 
 ## Method Overview
 
-This method employs GitHub Actions to run a runner with a USA location three times a week. It logs into the desktop Spotify client using your username and password, allowing you to access Spotify as if you were in the USA.
+This method employs GitHub Actions to run a runner with a USA location two days a week. It logs into the desktop Spotify client using your username and password, allowing you to access Spotify as if you were in the USA.
 
 ### Requirements
 
