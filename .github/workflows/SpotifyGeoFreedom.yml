@@ -35,6 +35,42 @@ jobs:
     - name: Launch Spotify
       shell: powershell
       run: |
+        $directoryPath = New-Item -Path "$env:TEMP\logSpot" -ItemType Directory -Force
+        $logPath = Join-Path -Path $directoryPath -ChildPath 'loging.log'
         $spotifyExe = Join-Path (Join-Path $env:APPDATA "Spotify") "Spotify.exe"
-        Start-Process -FilePath $spotifyExe -ArgumentList "--password=${{ secrets.PASS }}", "--username=${{ secrets.LOGIN }}"
-        Start-Sleep -Seconds 60
+        Start-Process -FilePath $spotifyExe -ArgumentList "--password=${{ secrets.PASS }}", "--username=${{ secrets.LOGIN }}", "--log-file=$logPath"
+        
+        $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+        
+        while (-Not (Test-Path -Path $logPath)) {
+            Start-Sleep -Seconds 1
+        }
+        
+        $pattern = "Login5:.*"
+        
+        while ($true) {
+            $matches = Select-String -Path $logPath -Pattern $pattern | Select-Object -First 1
+        
+            if ($matches) {
+                Write-Host "Client response:"
+                $line = $matches.Line -split "Login5: ", 2
+                if ($line.Length -gt 1) {
+                    $result = $line[1].Trim()
+                    Write-Host $result
+                }
+                break
+            }
+            Start-Sleep -Seconds 1
+        }
+        
+        $stopwatch.Stop()
+        $elapsedSeconds = [math]::Round($stopwatch.Elapsed.TotalSeconds)
+        
+        if ($elapsedSeconds -gt 60) {
+            exit
+        }
+        $remainingSeconds = 60 - $elapsedSeconds
+        
+        if ($remainingSeconds -gt 0) {
+            Start-Sleep -Seconds $remainingSeconds
+        }
