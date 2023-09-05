@@ -16,9 +16,6 @@ Before getting started, make sure you have the following:
 - A free Spotify account
 - Your Spotify account must have the USA selected as the country ( if you have another country specified, then you can change it yourself to Usa, use Vpn )
 
-### Does it really work?
-I have no idea🤣 as long as it's just being tested 
-
 ### Getting Started
 
 <details>
@@ -50,9 +47,18 @@ Follow these steps to set up and use this method:
 <details>
 <summary><small>Video tutorial</small></summary><p>
 
-[![YouTube](https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/-d-GTcHpodo)
+[![YouTube](https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube)](https://youtu.be/GriSDB4gIbU)
 
 </details>
+
+### Does it really work?
+I have no idea🤣 as long as it's just being tested 
+
+### Why is a login and password necessary? Is it considered secure?
+While setting up the method, you input your login and password into actions secrets. They are stored there in encrypted form, and only you have access to them. This is absolutely secure
+
+### Why can't I log into my Spotify account? 
+It's relatively rare, but Spotify can detect false suspicious activities. If this happens, you will receive an email with instructions to reset your password. After creating a new password, don't forget to update the PASS secret in your fork's settings.
 
 ## Disclaimer
 You are using this method at your own risk; the developer is not responsible for any potential issues.
