@@ -51,14 +51,57 @@ Follow these steps to set up and use this method:
 
 </details>
 
-### Does it really work?
-I have no idea🤣 as long as it's just being tested 
+### How can I check the runner's operation after the initial setup?
+
+If the time trigger has not yet activated, and you want to check if your runner is working successfully, manual launch is provided. Follow these steps:
+<details> 
+  <summary><small>Steps</small></summary><p> 
+     
+- While on the main page of your fork, go to the tab ![2023-09-11 080820](https://github.com/Tuc-tac/SpotifyGeoFreedom/assets/143889047/f26ca153-978e-4aed-8290-6267987635da)
+- In the left sidebar, click the "Run SpotifyGeoFreedom Script" button 
+  <details> 
+  <summary><small>screenshot</small></summary><p> 
+
+  ![Снимок экрана 2023-09-11 081017](https://github.com/Tuc-tac/SpotifyGeoFreedom/assets/143889047/d83e565c-bc62-4244-8506-cc611f5aad47)
+
+  </details>
+- On the right side, a dropdown menu "Run workflow" will appear, inside of which there will be a green "Run workflow" button. Click on it to start the runner
+  <details> 
+  <summary><small>screenshot</small></summary><p> 
+
+  ![Снимок экрана 2023-09-11 085001](https://github.com/Tuc-tac/SpotifyGeoFreedom/assets/143889047/940f4558-b7c3-486a-8141-de5635742411)
+
+  </details>
+- Wait for a couple of minutes until the script completes, and its icon turns green
+  <details> 
+  <summary><small>screenshot</small></summary><p> 
+
+  ![Снимок экрана 2023-09-11 082025](https://github.com/Tuc-tac/SpotifyGeoFreedom/assets/143889047/22aa5bf0-6b46-4a4a-a003-bbd857f46130)
+
+  </details>
+- Go to the runner actions "Run SpotifyGeoFreedom Script" => "run-powershell"
+- Expand the "Launch Spotify" action
+- If the script outputs "Client response: Successful authentication," then everything is fine; your runner has successfully opened the Spotify client using your login and password
+  <details> 
+  <summary><small>screenshot</small></summary><p> 
+
+  ![Снимок экрана 2023-09-11 082132](https://github.com/Tuc-tac/SpotifyGeoFreedom/assets/143889047/e99f089e-fe42-4d04-98d0-1a712cf7354b)
+
+  </details>
+- If you see the message "Client response: Failed authenticating: login5_invalid_credentials," then most likely you did not correctly set your login and password in the secret variables. Try doing it again. If you are sure that your login and password were set correctly, then in 99% of cases, Spotify has reset your password. Check your email; there should be a password reset form. You need to reset it and set the new password in the secret variable
+</details>
+
+### At what time does the runner trigger?
+The launch occurs every Monday and Thursday at 2:37 UTC
 
 ### Why is a login and password necessary? Is it considered secure?
-While setting up the method, you input your login and password into actions secrets. They are stored there in encrypted form, and only you have access to them. This is absolutely secure
+Login and password are required to access your account from an Usa IP address, thus resetting the 14-day regional restriction counter. While setting up the method, you input your login and password into actions secrets, they are stored there in encrypted form, and only you have access to them. This is absolutely secure
 
 ### Why can't I log into my Spotify account? 
 It's relatively rare, but Spotify can detect false suspicious activities. If this happens, you will receive an email with instructions to reset your password. After creating a new password, don't forget to update the PASS secret in your fork's settings.
+
+### Does it really work?
+I have no idea🤣 as long as it's just being tested 
 
 ## Disclaimer
 You are using this method at your own risk; the developer is not responsible for any potential issues.
