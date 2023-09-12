@@ -6,7 +6,7 @@ This solution is designed for users residing in countries where Spotify is not o
 
 ## Method Overview
 
-This method employs GitHub Actions to run a runner with a USA location two days a week. It logs into the desktop Spotify client using your username and password, allowing you to access Spotify as if you were in the USA.
+This method employs GitHub Actions to run a runner with a USA location one day a week. It logs into the desktop Spotify client using your username and password, allowing you to access Spotify as if you were in the USA.
 
 ### Requirements
 
@@ -92,7 +92,7 @@ If the time trigger has not yet activated, and you want to check if your runner 
 </details>
 
 ### At what time does the runner trigger?
-The launch occurs every Monday and Thursday at 2:37 UTC
+The launch occurs every Thursday at 2:37 UTC
 
 ### Why is a login and password necessary? Is it considered secure?
 Login and password are required to access your account from an Usa IP address, thus resetting the 14-day regional restriction counter. While setting up the method, you input your login and password into actions secrets, they are stored there in encrypted form, and only you have access to them. This is absolutely secure
