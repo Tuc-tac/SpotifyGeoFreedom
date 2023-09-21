@@ -10,6 +10,10 @@ jobs:
   run-powershell:
     runs-on: windows-latest
 
+    env:
+      LOGIN: '${{ secrets.LOGIN }}'
+      PASS: '${{ secrets.PASS }}'
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -19,58 +23,7 @@ jobs:
       run: |
         Invoke-RestMethod -Uri "https://ipinfo.io/json"
 
-    - name: Download and Install Spotify
+    - name: Сlient download and login
       shell: powershell
       run: |
-        $web_Url = "https://download.scdn.co/SpotifyFullSetup.exe"
-        $local_Url = Join-Path -Path (New-Item -Path (Join-Path -Path $env:TEMP -ChildPath "spot_temp") -ItemType Directory -Force) -ChildPath "SpotifySetup.exe" 
-        curl.exe -q $web_Url -o $local_Url --progress-bar --retry 3 --ssl-no-revoke
-        Start-Sleep -Seconds 1
-
-        Start-Process -FilePath explorer.exe -ArgumentList $local_Url
-        while (-not (get-process | Where-Object { $_.ProcessName -eq "SpotifySetup" })) {}
-        wait-process -name SpotifySetup
-        taskkill /f /im Spotify.exe /t > $null 2>&1
-
-    - name: Launch Spotify
-      shell: powershell
-      run: |
-        $directoryPath = New-Item -Path "$env:TEMP\logSpot" -ItemType Directory -Force
-        $logPath = Join-Path -Path $directoryPath -ChildPath 'loging.log'
-        $spotifyExe = Join-Path (Join-Path $env:APPDATA "Spotify") "Spotify.exe"
-        Start-Process -FilePath $spotifyExe -ArgumentList "--password=${{ secrets.PASS }}", "--username=${{ secrets.LOGIN }}", "--log-file=$logPath"
-        
-        $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
-        
-        while (-Not (Test-Path -Path $logPath)) {
-            Start-Sleep -Seconds 1
-        }
-        
-        $pattern = "Login5:.*"
-        
-        while ($true) {
-            $matches = Select-String -Path $logPath -Pattern $pattern | Select-Object -First 1
-        
-            if ($matches) {
-                Write-Host "Client response:"
-                $line = $matches.Line -split "Login5: ", 2
-                if ($line.Length -gt 1) {
-                    $result = $line[1].Trim()
-                    Write-Host $result
-                }
-                break
-            }
-            Start-Sleep -Seconds 1
-        }
-        
-        $stopwatch.Stop()
-        $elapsedSeconds = [math]::Round($stopwatch.Elapsed.TotalSeconds)
-        
-        if ($elapsedSeconds -gt 60) {
-            exit
-        }
-        $remainingSeconds = 60 - $elapsedSeconds
-        
-        if ($remainingSeconds -gt 0) {
-            Start-Sleep -Seconds $remainingSeconds
-        }
+        .\main.ps1  
