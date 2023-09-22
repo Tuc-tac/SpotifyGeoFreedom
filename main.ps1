@@ -1,6 +1,7 @@
 $web_Url = "https://download.scdn.co/SpotifyFullSetup.exe"
 $local_Url = Join-Path -Path (New-Item -Path (Join-Path -Path $env:TEMP -ChildPath "spot_temp") -ItemType Directory -Force) -ChildPath "SpotifySetup.exe" 
 curl.exe -q $web_Url -o $local_Url --progress-bar --retry 3 --ssl-no-revoke
+Write-Host
 Start-Sleep -Seconds 1
 
 Start-Process -FilePath explorer.exe -ArgumentList $local_Url
@@ -62,7 +63,7 @@ function Start-SpotifyAndWaitForLogin {
 }
 
 # We call the login function, if the login is unsuccessful, we call it again 2 more times
-$retryCount = 3
+$retryCount = 5
 $retry = 0
 $successful = "Successful authentication"
 
@@ -78,7 +79,7 @@ while ($retry -lt $retryCount) {
     $retry++
     Write-Host "Retry $retry of $retryCount..."
     Write-Host
-    if ($retry -lt 3) { Start-Sleep -Seconds 3 }
+    if ($retry -lt 5) { Start-Sleep -Seconds 5 }
 }
 
 if ($result -ne $successful) {
