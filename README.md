@@ -80,7 +80,7 @@ If the time trigger has not yet activated, and you want to check if your runner 
 
   </details>
 - Go to the runner actions "Run SpotifyGeoFreedom Script" => "run-powershell"
-- Expand the "Launch Spotify" action
+- Expand the "Сlient download and login" action
 - If the script outputs "Client response: Successful authentication," then everything is fine; your runner has successfully opened the Spotify client using your login and password
   <details> 
   <summary><small>screenshot</small></summary><p> 
