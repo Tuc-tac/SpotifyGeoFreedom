@@ -15,8 +15,14 @@ Before getting started, make sure you have the following:
 - A GitHub account
 - A free Spotify account
 - Your Spotify account must have the USA selected as the country ( if you have another country specified, then you can change it yourself to Usa, use Vpn )
+  
+> [!IMPORTANT]  
+> After successfully setting up the runner and initial authorization in the client, you do not need to use a VPN or other similar tools for the Spotify client, this may trigger their algorithms to reset your current password, and you will have to change it again in the fork settings and go through initial authorization, just use Spotify on your regular home network
 
 ### Getting Started
+
+> [!NOTE]
+> The country of your Spotify account should already be changed to the USA
 
 <details>
 <summary><small>Text tutorial</small></summary><p>
@@ -41,7 +47,11 @@ Follow these steps to set up and use this method:
 
 6. **Activate the Runner**:
     - Go to the `Actions` tab in your forked repository
-    - Confirm the activation of the runner
+    - Confirm the activation of runners for your fork
+    - In the upper left part of the screen, find two actions with the names:
+      - Run SpotifyGeoFreedom Scrip
+      - Keepalive Workflow
+    - You need to activate these two runners. To do this, click on each of them in turn and select "enable workflow" on the right side of the screen
 </details>
 
 <details>
@@ -51,9 +61,14 @@ Follow these steps to set up and use this method:
 
 </details>
 
+## FAQ
+
 ### How can I check the runner's operation after the initial setup?
+> [!WARNING]
+It is not recommended to frequently use manual runner launches as Spotify may reset your current password due to "suspicious activity"
 
 If the time trigger has not yet activated, and you want to check if your runner is working successfully, manual launch is provided. Follow these steps:
+
 <details> 
   <summary><small>Steps</small></summary><p> 
      
@@ -101,7 +116,9 @@ Login and password are required to access your account from an Usa IP address, t
 It's relatively rare, but Spotify can detect false suspicious activities. If this happens, you will receive an email with instructions to reset your password. After creating a new password, don't forget to update the PASS secret in your fork's settings.
 
 ### Does it really work?
-I have no idea🤣 as long as it's just being tested 
+As of now (15.07.2024), this method has been working for me for about a year. In the very beginning, Spotify's algorithms reset my password a few times. After that, these resets stopped, and I have been using my main account without any problems for over 8-9 months.
+
+I created a [thread](https://github.com/Tuc-tac/SpotifyGeoFreedom/issues/5) for the general flow of your thoughts
 
 ## Disclaimer
 You are using this method at your own risk; the developer is not responsible for any potential issues.
