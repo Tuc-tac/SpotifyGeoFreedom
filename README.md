@@ -1,3 +1,7 @@
+> [!CAUTION]
+> The method has stopped working, and the native parameters (password and username) that were used to log in to the client no longer function. Whether they were intentionally disabled or it's a server-side bug is up for discussion. I've archived the repository until they fix it or another way to log in to the client is found
+
+
 # SpotifyGeoFreedom
 
 **Bypassing Regional Restrictions for a Free Spotify Account**
